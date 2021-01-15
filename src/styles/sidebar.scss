@@ -5,8 +5,109 @@
     transition: margin-left .28s;
     margin-left: $sideBarWidth;
     position: relative;
+    // 夜间模式
+    .main-style-dark{
+      background-color:	DarkGray;
+      filter:brightness(0.4);
+    }
+    .main-style{
+
+    }
+    .fixed{
+      background-color: #ffffff;
+    }
+    .fixed-dark{
+      background-color: DarkGray;
+    }
   }
 
+  // 夜间模式部分
+  .dark-mode {
+    transition: width 0.28s;
+    width: $sideBarWidth !important;
+    background-color: $menuBgDark;
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+
+    // reset element-ui css
+    .horizontal-collapse-transition {
+      transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+    }
+
+    .scrollbar-wrapper {
+      overflow-x: hidden !important;
+    }
+
+    .el-scrollbar__bar.is-vertical {
+      right: 0px;
+    }
+
+    .el-scrollbar {
+      height: 100%;
+    }
+
+    &.has-logo {
+      .el-scrollbar {
+        height: calc(100% - 50px);
+      }
+    }
+
+    .is-horizontal {
+      display: none;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .svg-icon {
+      margin-right: 16px;
+    }
+
+    .sub-el-icon {
+      margin-right: 12px;
+      margin-left: -2px;
+    }
+
+    .el-menu {
+      border: none;
+      height: 100%;
+      width: 100% !important;
+      background-color: $menuBgDark;
+    }
+
+    // menu hover
+    .submenu-title-noDropdown,
+    .el-submenu__title {
+      &:hover {
+        background-color: $menuHoverDark !important;
+      }
+    }
+
+    .is-active>.el-submenu__title {
+      color: $subMenuActiveTextDark !important;
+    }
+
+    & .nest-menu .el-submenu>.el-submenu__title,
+    & .el-submenu .el-menu-item {
+      min-width: $sideBarWidth !important;
+      background-color: $subMenuBgDark !important;
+
+      &:hover {
+        background-color: $subMenuHoverDark !important;
+      }
+    }
+  }
+
+  // 正常模式
   .sidebar-container {
     transition: width 0.28s;
     width: $sideBarWidth !important;
@@ -66,6 +167,7 @@
       border: none;
       height: 100%;
       width: 100% !important;
+      background-color: $menuBg;
     }
 
     // menu hover
@@ -84,7 +186,6 @@
     & .el-submenu .el-menu-item {
       min-width: $sideBarWidth !important;
       background-color: $subMenuBg !important;
-
       &:hover {
         background-color: $subMenuHover !important;
       }
@@ -93,6 +194,9 @@
 
   .hideSidebar {
     .sidebar-container {
+      width: 54px !important;
+    }
+    .dark-mode{
       width: 54px !important;
     }
 
@@ -166,9 +270,18 @@
       transition: transform .28s;
       width: $sideBarWidth !important;
     }
+    .dark-mode{
+      transition: transform .28s;
+      width: $sideBarWidth !important;
+    }
 
     &.hideSidebar {
       .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-$sideBarWidth, 0, 0);
+      }
+      .dark-mode{
         pointer-events: none;
         transition-duration: 0.3s;
         transform: translate3d(-$sideBarWidth, 0, 0);
@@ -180,6 +293,9 @@
 
     .main-container,
     .sidebar-container {
+      transition: none;
+    }
+    .dark-mode{
       transition: none;
     }
   }

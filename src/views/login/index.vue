@@ -3,7 +3,6 @@
     <el-form
       ref="loginForm"
       :model="loginForm"
-      :rules="loginRules"
       class="login-form"
       auto-complete="on"
       label-position="left"
@@ -59,7 +58,7 @@
 
       <div class="tips">
         <span style="margin-right: 20px">username: admin</span>
-        <span> password: any</span>
+        <span> password: 123456</span>
       </div>
     </el-form>
   </div>
@@ -73,32 +72,10 @@ import { setToken } from "@/utils/auth"
 export default {
   name: "Login",
   data() {
-    const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error("Please enter the correct user name"));
-      } else {
-        callback();
-      }
-    };
-    const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error("The password can not be less than 6 digits"));
-      } else {
-        callback();
-      }
-    };
     return {
       loginForm: {
         username: "admin",
         password: "123456",
-      },
-      loginRules: {
-        username: [
-          { required: true, trigger: "blur", validator: validateUsername },
-        ],
-        password: [
-          { required: true, trigger: "blur", validator: validatePassword },
-        ],
       },
       loading: false,
       passwordType: "password",
@@ -130,7 +107,7 @@ export default {
           this.loading = true;
           Login(this.loginForm)
             .then((res) => {
-              const { data, meta } = res.data;
+              const { data, meta } = res;
               if (meta.status == 200) {
                 setToken(data.token);
                 this.$router.push({ path: "/dashboard/dashboard" });
@@ -138,6 +115,7 @@ export default {
               }
               else{
                 this.$message.error(meta.msg)
+                this.loading = false;
               }
             })
             .catch(() => {
@@ -201,7 +179,7 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
+$bg:#333333;
 $dark_gray: #889aa4;
 $light_gray: #eee;
 

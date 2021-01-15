@@ -1,13 +1,21 @@
 const TokenKey = 'vue_admin_template_token'
 
 export function getToken() {
-  return localStorage.getItem(TokenKey)
+  return sessionStorage.getItem(TokenKey)
 }
 
 export function setToken(token) {
-  return localStorage.setItem(TokenKey, token)
+  return sessionStorage.setItem(TokenKey, token)
 }
 
 export function removeToken() {
-  return localStorage.removeItem(TokenKey)
+  return sessionStorage.removeItem(TokenKey)
+}
+
+export function setColor(color) {
+  return localStorage.setItem('dark-mode',color)
+}
+
+export function getColor() {
+  return localStorage.getItem('dark-mode')
 }

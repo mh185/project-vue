@@ -124,6 +124,7 @@ header {
     color: #fff;
     text-align: center;
     line-height: 1.25rem;
+    margin: 0;
   }
   .showTime {
     position: absolute;

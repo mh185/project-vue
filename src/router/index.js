@@ -11,6 +11,7 @@ import Layout from '@/layout'
 import { getToken } from "@/utils/auth"
 
 import map from "./modules/map"
+import user from "./modules/user"
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -36,6 +37,12 @@ import map from "./modules/map"
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+
+export const asyncRoutes = [
+  user,
+  map
+]
+
 export const constantRoutes = [{
     path: '/login',
     component: () => import('@/views/login/index'),
@@ -82,9 +89,7 @@ export const constantRoutes = [{
     hidden: true
   }
 ]
-export const asyncRoutes = [
-  map
-]
+
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
